@@ -1,0 +1,62 @@
+    """
+    Recebe uma string qualquer e devolve 'Masculino' ou 'Feminino' se reconhecer,
+    senão retorna '' (inválido).
+    """
+    t = txt.strip().lower()
+    # padrões aceitos
+    masculinos = {"m", "masc", "masculino", "homem", "h"}
+    femininos = {"f", "fem", "feminino", "mulher"}
+    if t in masculinos:
+        return "Masculino"
+    if t in femininos:
+        return "Feminino"
+    return ""
+
+
+N = 15
+alturas = []
+generos = []
+
+for i in range(1, N + 1):
+    print(f"\nPessoa {i}:")
+
+    # altura validada
+    while True:
+        bruto = input("Digite a altura (em metros, ex: 1,70 ou 1.70): ").strip().replace(",", ".")
+        try:
+            altura = float(bruto)
+            if 0.5 <= altura <= 2.5:
+                break
+            else:
+                print("Altura fora do intervalo plausível (0.5 a 2.5 m). Tente novamente.")
+        except ValueError:
+            print("Valor inválido. Digite um número, ex: 1,70 ou 1.70.")
+
+    # gênero validado
+    while True:
+        genero_in = input("Digite o gênero (Masculino/Feminino ou M/F): ")
+        genero = normalizar_genero(genero_in)
+        if genero:
+            break
+        else:
+            print("Gênero inválido. Use Masculino/M, Feminino/F, etc.")
+
+    alturas.append(altura)
+    generos.append(genero)
+
+# Cálculos
+maior_altura = max(alturas)
+menor_altura = min(alturas)
+
+# Média de altura dos homens usando zip (mais pythonico)
+alturas_homens = [h for h, g in zip(alturas, generos) if g == "Masculino"]
+media_altura_homens = sum(alturas_homens) / len(alturas_homens) if alturas_homens else 0.0
+
+qtd_mulheres = sum(1 for g in generos if g == "Feminino")
+
+# Saída
+print("\n===== RESULTADOS =====")
+print(f"A maior altura do grupo: {maior_altura:.2f} m")
+print(f"A menor altura do grupo: {menor_altura:.2f} m")
+print(f"A média de altura dos homens: {media_altura_homens:.2f} m")
+print(f"Número de mulheres: {qtd_mulheres}")
