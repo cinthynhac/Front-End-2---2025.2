@@ -1,0 +1,21 @@
+//criar array de nomes
+let nomes = ["Ana", "Bruno", "Carla", "Diego", "Eduarda"];
+console.log("Terceiro nome:", nomes[2]);
+
+// adicionando nomes
+nomes.push("Fernanda");  // adiciona no final
+nomes.unshift("Zeca");   // adiciona no início
+console.log("Após adicionar no início e final:", nomes);
+
+//remove
+nomes.pop(); 
+console.log("Após remover o último:", nomes);
+
+let numeros = [2, 4, 6, 8];
+let dobrados = numeros.map(num => num * 2);
+console.log("Array dobrado:", dobrados);
+
+//filtro
+let lista = [1, 3, 5, 7, 9];
+let maioresQue5 = lista.filter(num => num > 5);
+console.log("Números maiores que 5:", maioresQue5);
